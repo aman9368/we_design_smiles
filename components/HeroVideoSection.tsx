@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import VideoOverlay from "./VideoOverlay";
 
 export interface HeroVideoSectionProps {
   videoFramePath?: string;
@@ -436,20 +437,20 @@ export default function HeroVideoSection({
             className="hidden"
           />
 
-          {/* Frame Scrubbing Progress HUD & Walkthrough Stages */}
-          <div className="absolute top-6 left-6 z-20 flex items-center gap-3 bg-slate-900/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-sky-500/20 text-xs font-medium text-sky-200">
-            <span className="relative flex h-2 w-2">
+          {/* Frame Scrubbing Progress HUD & Walkthrough Stages - Responsive on Mobile */}
+          <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-20 flex items-center gap-2 sm:gap-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-sky-500/20 text-[10px] sm:text-xs font-medium text-sky-200 shadow-md">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-sky-500"></span>
             </span>
-            <span>
+            <span className="truncate max-w-[130px] sm:max-w-none">
               {scrollProgress < 0.35
-                ? "1. Reception Lounge"
+                ? "Reception Lounge"
                 : scrollProgress < 0.7
-                ? "2. Sterilization Corridor"
-                : "3. Treatment Suite"}
+                ? "Sterilization Corridor"
+                : "Treatment Suite"}
             </span>
-            <span className="text-slate-400">|</span>
+            <span className="text-slate-500">|</span>
             <span className="font-mono text-slate-300">
               {String(currentFrame + 1).padStart(2, "0")}/{totalFrames}
             </span>
@@ -463,47 +464,14 @@ export default function HeroVideoSection({
             />
           </div>
 
-          {/* Bottom 15% White Gradient Overlay with High Readability & Contrast */}
-          <div className="absolute bottom-0 inset-x-0 h-[28%] md:h-[22%] lg:h-[18%] bg-gradient-to-t from-white/85 via-white/70 to-transparent pointer-events-none z-10" />
-
-          {/* Text Overlay & Interactive Indicator Area */}
-          <div className="absolute bottom-0 inset-x-0 z-20 px-6 py-4 sm:px-10 sm:py-6 md:px-16 md:py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left pointer-events-auto">
-            {/* Title & Description Overlay */}
-            <div className="max-w-2xl">
-              <span className="inline-block text-sky-800 text-xs md:text-sm font-semibold tracking-wider uppercase mb-1 drop-shadow-sm">
-                Cinematic Walkthrough
-              </span>
-              <h1 className="text-slate-950 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight drop-shadow-sm">
-                {overlayTitle}
-              </h1>
-              <p className="mt-1 text-slate-800 text-xs sm:text-sm md:text-base font-medium drop-shadow-sm">
-                {overlayDescription}
-              </p>
-            </div>
-
-            {/* Subtle Interactive Scroll Guide / Arrow */}
-            <button
-              onClick={scrollToNext}
-              aria-label="Scroll to explore clinic services"
-              className="group flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-white/80 hover:bg-white text-slate-800 shadow-md backdrop-blur-sm border border-slate-200/80 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-            >
-              <span className="text-[11px] sm:text-xs font-semibold tracking-wide text-slate-700 group-hover:text-sky-600 transition-colors uppercase">
-                {scrollProgress > 0.9 ? "Explore More" : "Scroll to Scrub"}
-              </span>
-              <div className="relative w-5 h-5 flex items-center justify-center text-sky-600 animate-bounce">
-                <svg
-                  className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </button>
-          </div>
+          {/* Reusable Mobile-Optimized VideoOverlay Component */}
+          <VideoOverlay
+            title={overlayTitle}
+            description={overlayDescription}
+            categoryBadge="Cinematic Walkthrough"
+            actionText={scrollProgress > 0.9 ? "Explore More" : "Scroll to Scrub"}
+            onActionClick={scrollToNext}
+          />
         </div>
       </div>
     </section>

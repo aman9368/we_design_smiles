@@ -25,42 +25,42 @@ export function VideoOverlay({
 
   return (
     <>
-      {/* Bottom 15% White Gradient Layer (85% Opacity) */}
+      {/* Bottom White Gradient Layer - Responsive height for mobile */}
       <div
-        className="absolute bottom-0 inset-x-0 h-[28%] md:h-[22%] lg:h-[18%] bg-gradient-to-t from-white/85 via-white/70 to-transparent pointer-events-none z-10"
+        className="absolute bottom-0 inset-x-0 h-[38%] sm:h-[28%] md:h-[22%] lg:h-[18%] bg-gradient-to-t from-white/95 via-white/80 to-transparent pointer-events-none z-10"
         aria-hidden="true"
       />
 
-      {/* High-Contrast Responsive Typography & Interaction Area */}
+      {/* High-Contrast Responsive Typography & Action Button */}
       <div
-        className={`absolute bottom-0 inset-x-0 z-20 px-6 py-4 sm:px-10 sm:py-6 md:px-16 md:py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left pointer-events-auto ${className}`}
+        className={`absolute bottom-0 inset-x-0 z-20 px-3 py-2.5 sm:px-8 sm:py-5 md:px-12 md:py-6 flex items-end sm:items-center justify-between gap-3 text-left pointer-events-auto ${className}`}
       >
-        <div className="max-w-2xl">
+        <div className="max-w-xl sm:max-w-2xl min-w-0 flex-1">
           {categoryBadge && (
-            <span className="inline-block text-sky-800 text-xs md:text-sm font-semibold tracking-wider uppercase mb-1 drop-shadow-sm">
+            <span className="hidden sm:inline-block text-sky-800 text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-0.5 drop-shadow-sm">
               {categoryBadge}
             </span>
           )}
-          <h2 className="text-slate-950 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight drop-shadow-sm">
+          <h2 className="text-slate-950 font-extrabold text-xs xs:text-sm sm:text-xl md:text-2xl lg:text-3xl tracking-tight leading-snug drop-shadow-sm line-clamp-2 sm:line-clamp-none">
             {displayTitle}
           </h2>
-          <p className="mt-1 text-slate-800 text-xs sm:text-sm md:text-base font-medium drop-shadow-sm">
+          <p className="mt-0.5 text-slate-800 text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-medium drop-shadow-sm line-clamp-1 sm:line-clamp-none">
             {description}
           </p>
         </div>
 
-        {/* Subtle Interactive Scroll Guide / Arrow Indicator */}
+        {/* Responsive Interactive Scroll Guide / Arrow */}
         <button
           onClick={onActionClick}
           aria-label="Navigate to next section"
-          className="group flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-white/80 hover:bg-white text-slate-800 shadow-md backdrop-blur-sm border border-slate-200/80 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          className="shrink-0 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 px-2 sm:py-2 sm:px-3.5 rounded-lg sm:rounded-xl bg-white/90 hover:bg-white text-slate-800 shadow-md backdrop-blur-sm border border-slate-200/90 transition-all hover:scale-105 active:scale-95 cursor-pointer"
         >
-          <span className="text-[11px] sm:text-xs font-semibold tracking-wide text-slate-700 group-hover:text-sky-600 transition-colors uppercase">
+          <span className="hidden xs:inline-block text-[9px] sm:text-[11px] font-bold tracking-wider text-slate-700 uppercase">
             {actionText}
           </span>
-          <div className="relative w-5 h-5 flex items-center justify-center text-sky-600 animate-bounce">
+          <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 flex items-center justify-center text-sky-600 animate-bounce">
             <svg
-              className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
+              className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"

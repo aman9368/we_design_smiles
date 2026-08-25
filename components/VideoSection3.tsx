@@ -419,20 +419,20 @@ export function VideoSection3({
             className="hidden"
           />
 
-          {/* Frame Scrubbing Progress HUD & Walkthrough Stages */}
-          <div className="absolute top-6 left-6 z-20 flex items-center gap-3 bg-slate-900/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-sky-500/20 text-xs font-medium text-sky-200">
-            <span className="relative flex h-2 w-2">
+          {/* Frame Scrubbing Progress HUD & Walkthrough Stages - Responsive for Mobile */}
+          <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-20 flex items-center gap-2 sm:gap-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-sky-500/20 text-[10px] sm:text-xs font-medium text-sky-200 shadow-md">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-cyan-500"></span>
             </span>
-            <span>
+            <span className="truncate max-w-[130px] sm:max-w-none">
               {scrollProgress < 0.38
-                ? "1. Serene Arrival"
+                ? "Serene Arrival"
                 : scrollProgress < 0.72
-                ? "2. Clinic Flow"
-                : "3. Interactive Suite"}
+                ? "Clinic Flow"
+                : "Interactive Suite"}
             </span>
-            <span className="text-slate-400">|</span>
+            <span className="text-slate-500">|</span>
             <span className="font-mono text-slate-300">
               {String(currentFrame + 1).padStart(2, "0")}/{totalFrames}
             </span>
